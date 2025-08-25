@@ -43,7 +43,7 @@ A React Native application built with Expo that allows users to search for books
 ### Local Development
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/google-books-app.git
+git clone https://github.com/ferrin-y/google-books-app.git
 cd google-books-app
 
 # Install dependencies
@@ -99,15 +99,12 @@ google-books-app/
 - [ ] Offline mode support
 - [ ] Advanced search filters
 
-## 📄 License
-
-This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
 ## 🙋‍♂️ Contact
 
 Ferrin - [Ferrin.yesudasan@gmail.com](mailto:ferrin.yesudasan.com)
 
-Project Link: [https://github.com/yourusername/google-books-app](https://github.com/yourusername/google-books-app)
+Project Link: [https://github.com/ferrin-y/google-books-app](https://github.com/ferrin-y/google-books-app)
 
 ---
 
