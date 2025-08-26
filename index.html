@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Books App - Mobile Preview</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Outfit:wght@100..900&display=swap');
+        /* :root {
+            --color-primary: 119, 96, 235;
+            --color-secondary: 103, 126, 234;
+            --bg-primary: 17, 24, 39;
+            --text-primary: 243, 244, 246;
+        } */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Fixed Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(243, 244, 246, 0.1);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Lilita One', sans-serif;
+            color: rgb(119, 96, 235);
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand:hover {
+            color: rgb(255, 255, 255);
+            transform: translateY(-1px);
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-left: 1rem;
+        }
+
+        .nav-link {
+            color: rgb(243, 244, 246);
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgb(119, 96, 235), rgb(103, 126, 234));
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: rgb(130, 106, 255);
+            background: rgba(119, 96, 235, 0.05);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(119, 96, 235, 0.25);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+            padding: 40px 20px;
+        }
+        
+        .demo-info {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .demo-info h1 {
+            font-family: "Lilita One", sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .demo-info p {
+            font-family: "Outfit", sans-serif;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            background: none;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .app-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 30px;
+        }
+        
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 15px 15px;
+            z-index: 10;
+        }
+        
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.primary {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .phone-container {
+                width: 300px;
+                height: 650px;
+            }
+            
+            .demo-info h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="https://github.com/Ferrin-Y" target="_blank">
+            <i class="bi bi-github"></i>Ferrin-Y
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="https://linkedin.com/in/ferrin-yesudasan" target="_blank">
+                    Ferrin Yesudasan
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="demo-info">
+            <h1>Google Books App</h1>
+            <p>Search books, save favorites, and explore</p>
+        </div>
+        
+        <div class="phone-container">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+                <iframe 
+                    class="app-frame" 
+                    src="./app.html"
+                    title="Google Books App Demo">
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <a href="https://github.com/Ferrin-Y/google-books-app" class="btn primary">View Code</a>
+            <a href="./app.html" class="btn" target="_blank">Full Screen</a>
+        </div>
+    </div>
+</body>
+</html>
